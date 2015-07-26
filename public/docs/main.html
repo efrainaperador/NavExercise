@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>main.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page_wrapper">
+            <div id="jump_page">
+              
+                
+                <a class="source" href="app.html">
+                  app.js
+                </a>
+              
+                
+                <a class="source" href="main.html">
+                  main.js
+                </a>
+              
+            </div>
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>main.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              <p>General JSON loader <br/>
+<strong>@callback</strong>: function to be called when the method is complete<br/>
+<strong>@url</strong>: URL of the JSON file to be loaded<br/>
+<strong>@context</strong>: Javascript context for the callback(default context is window object)<br/></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">loadJSON</span>(<span class="hljs-params">callback, url, context</span>) </span>{
+	<span class="hljs-keyword">var</span> xobj = <span class="hljs-keyword">new</span> XMLHttpRequest();
+	xobj.overrideMimeType(<span class="hljs-string">"application/json"</span>);
+	xobj.open(<span class="hljs-string">'GET'</span>, url, <span class="hljs-literal">true</span>); <span class="hljs-comment">// Replace 'my_data' with the path to your file</span>
+	xobj.onreadystatechange = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+		<span class="hljs-keyword">if</span> (xobj.readyState == <span class="hljs-number">4</span> &amp;&amp; xobj.status == <span class="hljs-string">"200"</span>) {
+			callback.call(context, <span class="hljs-built_in">JSON</span>.parse(xobj.responseText));
+		}
+	};
+	xobj.send(<span class="hljs-literal">null</span>);  
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>Determines if the actual device is mobile based on the screen resolution</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isMobile</span>(<span class="hljs-params"></span>)</span>{
+	<span class="hljs-keyword">var</span> width = <span class="hljs-built_in">window</span>.innerWidth;
+	<span class="hljs-keyword">if</span>(width &lt;= <span class="hljs-number">768</span>){
+		<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+	}
+	<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>Initialize the page events</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">init</span>(<span class="hljs-params">config</span>)</span>{
+	App.initialize(config);
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>Document ready, load json with the configuration</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+	loadJSON(init, <span class="hljs-string">'config.json'</span>, <span class="hljs-keyword">this</span>);
+})();</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>

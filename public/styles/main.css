@@ -1,8 +1,25 @@
 @import "fonts.css";
 
+/********************* General purpose styles ***************************/
+html{
+  width: 100%;
+}
+
 body {
   background: #ec008c;
   color: #fff;
+  margin: 0;
+  padding: 0;
+  min-width: 1024px;
+  width: 100%;
+}
+
+.content{
+  background: #FFF;
+}
+
+.hide{
+  display: none;
 }
 
 h1 {
@@ -16,3 +33,239 @@ h1 {
   letter-spacing: -0.06em;
   text-align: center;
 }
+
+.shadow{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  background: rgba(0,0,0,0.3);
+  top: 0;
+  left: 0;
+}
+
+.copyright{
+  display: none;
+}
+
+/********************* End general purpose styles ***************************/
+/************************** Header styles *********************************/
+
+header{
+  padding: 0 84px;
+  margin: 0;
+  background: #ec008c;
+  position: relative;
+  z-index: 20;
+}
+
+header a.toggle{
+  display: none;
+}
+
+header a{
+  display: inline-block;
+  font: 21px/48px HUGEAvantGardeBold;
+  text-decoration: none;
+  color: #fff;
+  padding: 0 24px;
+}
+
+header a:hover, header a.hover{
+  background: #fff;
+  color: #ec008c;
+}
+
+header a:first-child{
+  margin: 0 0 0 48px;
+}
+
+header nav a.chevron{
+  display: none;
+}
+
+
+.submenu{
+  position: absolute;
+  width: 222px;
+  background-color: #FFF;
+  z-index: 20;
+}
+
+.submenu a{
+  color: #000;
+  display: block;
+  font: 16px/48px Galaxie;
+}
+
+.submenu a:first-child{
+  margin: 0;  
+}
+
+.submenu a:hover{
+  background: #eee;
+}
+
+header nav ul.items-list{
+  display: none;
+}
+/************************** End Header styles *********************************/
+/************************** Section styles *********************************/
+
+section{
+  height: 640px;
+  width: 100%;
+  background: url(../images/background-image.jpg) no-repeat;
+}
+
+section h1{
+  position: relative;
+  width: 60%;
+  font: 120px/1 HUGEAvantGardeBold;;
+  text-align: center;
+}
+
+/************************** End Section styles *********************************/
+/************************** Footer styles *********************************/
+footer{
+  background: #fff;
+  width: 100%;
+  padding: 60px 0;
+  text-align: center;
+}
+
+footer p{
+  width: 968px;
+  text-align: justify;
+  color: rgba(0, 0, 0, 0.5);
+  font: 24px Galaxie;
+  margin: 0 auto;
+}
+/************************** End footer styles *********************************/
+/************************** Mobile styles *********************************/
+@media screen and (max-width: 768px){
+  body{
+    min-width: 0;
+  }
+  header{
+    width: 100%;
+  }
+  header.open{
+    height: 20px;
+    padding: 20px 0;
+  }
+
+  header.open a.toggle{
+    display: block;
+    background: url(../images/toggle-open.svg);
+    background-size: 100% 100%;
+    width: 24px;
+    height: 20px;
+    margin: 0;
+  }
+
+  header.open a.toggle.close{
+    margin: 0 0 0 90%;
+    background-image: url(../images/toggle-close.svg);
+  }
+
+  header.open nav{
+    width: 80%;
+    height: auto;
+    background: #FFF;
+    position: absolute;
+    margin: 20px 0 0 -80%;
+    padding: 12px 0 0;
+    z-index: 20;
+    min-height: 100vmin;
+
+  }
+
+  header.open nav a{
+    display: block;
+    width: 96%;
+    color: #000;
+    padding: 0 0 0 4%;
+    font: 21px/48px HUGEAvantGardeBold;
+  }
+
+  header.open nav > a:hover{
+    color: #000;
+    background-color: #eee;
+  }
+
+  header.open nav > a:first-child{
+    margin: 0;
+  }
+
+  section{
+    height: 240px;
+  }
+
+  section h1{
+    font: 44px/48px HUGEAvantGardeBold;
+    text-align: left;
+    color: #000;
+    top: 100%;
+    transform: none;
+    left: 24px;
+    margin: 50px 0;
+    float: left;
+
+  }
+
+  footer{
+    margin: 120px 0 0;
+    padding: 60px 24px;
+    width: 93%;
+  }
+
+  footer p{
+    width: 100%;
+  }
+
+  header nav a.chevron{
+    float: right;
+    width: 48px;
+    background: url('../images/chevron.png') no-repeat center;
+    display: block;
+    height: 48px;
+    padding: 0;
+  }
+
+  header nav a.chevron.rotate{
+    transform: rotate(180deg);
+  }
+
+  header nav ul.items-list{
+    margin: 0;
+    padding: 0;
+  }
+
+  header nav ul.items-list.show{
+    display: block;
+  }
+
+  header nav ul.items-list li{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+  }
+
+  header nav ul.items-list li a{
+    padding: 0;
+    margin: 0 0 0 24px;
+    font: 16px/48px Galaxie;
+  }
+
+  .copyright{
+    position: absolute;
+    bottom: 60px;
+    color: #000;
+    display: block;
+    padding: 0 24px;
+    font: 12px/16px Helvetica;
+  }
+}
+/************************** End mobile styles *********************************/

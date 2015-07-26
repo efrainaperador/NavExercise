@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>app.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page_wrapper">
+            <div id="jump_page">
+              
+                
+                <a class="source" href="app.html">
+                  app.js
+                </a>
+              
+                
+                <a class="source" href="main.html">
+                  main.js
+                </a>
+              
+            </div>
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>app.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              <p>Main variable, contains all the web events and actions</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> App = {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>Initialize the App</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	initialize: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">config</span>)</span>{
+		<span class="hljs-keyword">this</span>.dataUrl = config.dataUrl;
+		<span class="hljs-keyword">this</span>.navItems = [];
+		<span class="hljs-keyword">this</span>.loadNavigation();
+	},</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>Load the desktop navigation</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	loadNavigation: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+		loadJSON(<span class="hljs-keyword">this</span>.showNavigation, <span class="hljs-keyword">this</span>.dataUrl, <span class="hljs-keyword">this</span>);
+	},</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>Load desktop events</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	loadEvents: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+		<span class="hljs-keyword">var</span> elements = <span class="hljs-built_in">document</span>.getElementsByClassName(<span class="hljs-string">"nav-item"</span>);
+		<span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>, l = elements.length; i &lt; l; i++){
+			<span class="hljs-keyword">var</span> elem = elements[i];
+			elem.onmouseover = <span class="hljs-keyword">this</span>.showSubMenu.bind(<span class="hljs-keyword">this</span>);
+		}
+	},</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>Load mobile events</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	loadMobileEvents: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+		<span class="hljs-keyword">var</span> menuIcon = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'toggleMobile'</span>);
+		menuIcon.onclick = <span class="hljs-keyword">this</span>.showMenuMobile.bind(<span class="hljs-keyword">this</span>);
+
+		<span class="hljs-keyword">var</span> chevrons = <span class="hljs-built_in">document</span>.getElementsByClassName(<span class="hljs-string">'chevron'</span>);
+		<span class="hljs-keyword">var</span> parent = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'menu'</span>);
+		<span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i= <span class="hljs-number">0</span>, l = chevrons.length; i &lt; l; i++){
+			<span class="hljs-keyword">var</span> index = chevrons[i].getAttribute(<span class="hljs-string">'data-id'</span>);
+			<span class="hljs-keyword">var</span> list = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">'ul'</span>);
+			list.className = <span class="hljs-string">'items-list'</span>;
+			<span class="hljs-keyword">var</span> elements = <span class="hljs-keyword">this</span>.navItems[index].items;
+			<span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> j = <span class="hljs-number">0</span>, m = elements.length; j &lt; m; j++){
+				<span class="hljs-keyword">var</span> item = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">'li'</span>);
+				<span class="hljs-keyword">var</span> link = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">'a'</span>);
+				link.href = elements[j].url;
+				link.innerHTML = elements[j].label;
+				item.appendChild(link);
+				list.appendChild(item);
+			}
+			parent.insertBefore(list, chevrons[i].parentElement.nextSibling);
+			chevrons[i].onclick = <span class="hljs-keyword">this</span>.showSubmenuMobile;
+		}
+	},</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>Creates and injects the desktop navigation
+<strong>@param: data</strong> Contains the nav.json information</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	showNavigation: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">data</span>)</span>{
+		<span class="hljs-keyword">this</span>.navItems = data.items;
+		<span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>, l = <span class="hljs-keyword">this</span>.navItems.length; i &lt; l; i++){
+			<span class="hljs-keyword">var</span> elem = <span class="hljs-keyword">this</span>.navItems[i];
+			<span class="hljs-keyword">var</span> template = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">'a'</span>);
+			template.href = elem.url;
+			template.className = <span class="hljs-string">"nav-item"</span>;
+			template.innerHTML = elem.label;
+			template.setAttribute(<span class="hljs-string">'data-id'</span>, i);
+			<span class="hljs-keyword">if</span>(elem.items.length &gt; <span class="hljs-number">0</span>){
+				<span class="hljs-keyword">var</span> chevron = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">'a'</span>);
+				chevron.setAttribute(<span class="hljs-string">'data-id'</span>, i);
+				chevron.className = <span class="hljs-string">"chevron"</span>;
+				template.appendChild(chevron);
+			}
+			<span class="hljs-keyword">var</span> container = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'menu'</span>);
+			container.appendChild(template);
+		}
+		<span class="hljs-keyword">if</span>(!isMobile()){<span class="hljs-keyword">this</span>.loadEvents();}<span class="hljs-keyword">else</span>{<span class="hljs-keyword">this</span>.loadMobileEvents()};
+	},</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>Creates and injects the accordion sub menu
+<strong>@param: evt</strong> contains the event information</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	showSubMenu: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">evt</span>)</span>{
+		<span class="hljs-keyword">this</span>.removeSubMenu();
+		<span class="hljs-keyword">var</span> navItem = evt.srcElement;
+		navItem.className = navItem.className + <span class="hljs-string">' hover'</span>;
+		<span class="hljs-keyword">var</span> index = navItem.getAttribute(<span class="hljs-string">'data-id'</span>);
+		<span class="hljs-keyword">var</span> subItems = <span class="hljs-keyword">this</span>.navItems[index].items;
+		<span class="hljs-keyword">if</span>(subItems.length &gt; <span class="hljs-number">0</span>){
+			<span class="hljs-keyword">var</span> container = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">'div'</span>);
+			<span class="hljs-keyword">var</span> menu = <span class="hljs-built_in">document</span>.getElementsByClassName(<span class="hljs-string">'nav-item'</span>);
+			<span class="hljs-keyword">var</span> positionX = menu[index].offsetLeft;
+			container.className = <span class="hljs-string">'submenu'</span>;
+			container.id = <span class="hljs-string">'submenu'</span>;
+			container.setAttribute(<span class="hljs-string">"style"</span>, <span class="hljs-string">'left:'</span> + positionX + <span class="hljs-string">'px'</span>);
+			<span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>, l = subItems.length; i &lt; l; i++){
+				<span class="hljs-keyword">var</span> template = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">'a'</span>);
+				template.href = subItems[i].url;
+				template.className = <span class="hljs-string">"nav-subitem"</span>;
+				template.innerHTML = subItems[i].label;
+				container.appendChild(template);
+			}
+			<span class="hljs-keyword">var</span> header = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'header'</span>);
+			header.appendChild(container);
+			container.onmouseleave = <span class="hljs-keyword">this</span>.removeSubMenu.bind(<span class="hljs-keyword">this</span>);
+			<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'shadow'</span>).className = <span class="hljs-string">'shadow'</span>;
+		}<span class="hljs-keyword">else</span>{
+			navItem.onmouseleave = <span class="hljs-keyword">this</span>.removeSubMenu.bind(<span class="hljs-keyword">this</span>);
+		}
+		
+	},</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <p>Remove the accordion sub menu from the screen on mouse leave
+<strong>@param: evt</strong> contains the event information</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	removeSubMenu: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">evt</span>)</span>{
+		<span class="hljs-keyword">var</span> parent = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'header'</span>);
+		<span class="hljs-keyword">var</span> menu = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'submenu'</span>);
+		<span class="hljs-keyword">var</span> hover = <span class="hljs-built_in">document</span>.getElementsByClassName(<span class="hljs-string">'hover'</span>);
+		<span class="hljs-keyword">if</span>(hover[<span class="hljs-number">0</span>]){hover[<span class="hljs-number">0</span>].className = hover[<span class="hljs-number">0</span>].className.substr(<span class="hljs-number">0</span>, hover[<span class="hljs-number">0</span>].className.indexOf(<span class="hljs-string">' hover'</span>));}
+		<span class="hljs-keyword">if</span>(menu){parent.removeChild(menu);};
+		<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'shadow'</span>).className = <span class="hljs-string">'hide shadow'</span>;
+	},</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <p>show mobile menu when user clicks the toggle button
+<strong>@param: evt</strong> contains the event information</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	showMenuMobile: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">evt</span>)</span>{
+		<span class="hljs-keyword">var</span> menu = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'menu'</span>);
+		<span class="hljs-keyword">if</span>(menu.className.indexOf(<span class="hljs-string">'closed'</span>) == -<span class="hljs-number">1</span>){
+			<span class="hljs-keyword">var</span> toggle = evt.srcElement;
+			menu.style.margin = <span class="hljs-string">"20px 0 0 0"</span>;
+			menu.className = menu.className + <span class="hljs-string">' closed'</span>;
+			toggle.className = toggle.className + <span class="hljs-string">' close'</span>;	
+			<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'shadow'</span>).className = <span class="hljs-string">'shadow'</span>;
+		}<span class="hljs-keyword">else</span>{
+			<span class="hljs-keyword">this</span>.hideMenuMobile();
+		}
+		
+	},</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <p>hide mobile menu when user clicks the close button
+<strong>@param: evt</strong> contains the event information</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	hideMenuMobile: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+		<span class="hljs-keyword">var</span> menu = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'menu'</span>);
+		menu.style.margin = <span class="hljs-string">"20px 0 0 -80%"</span>;
+		menu.className = menu.className.substr(<span class="hljs-number">0</span>, menu.className.indexOf(<span class="hljs-string">' closed'</span>));
+
+		<span class="hljs-keyword">var</span> toggle = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'toggleMobile'</span>);
+		toggle.className = toggle.className.substr(<span class="hljs-number">0</span>, toggle.className.indexOf(<span class="hljs-string">' close'</span>));	
+
+		<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'shadow'</span>).className = <span class="hljs-string">'hide shadow'</span>;
+	},</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <p>show/hide accordion sub menu when user clicks the chevron
+<strong>@param: evt</strong> contains the event information</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	showSubmenuMobile: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">evt</span>)</span>{
+		<span class="hljs-keyword">var</span> list = evt.srcElement.parentElement.nextSibling;
+		<span class="hljs-keyword">var</span> show = <span class="hljs-built_in">document</span>.getElementsByClassName(<span class="hljs-string">'show'</span>);
+		<span class="hljs-keyword">if</span>(show.length &gt; <span class="hljs-number">0</span>){show[<span class="hljs-number">0</span>].className = show[<span class="hljs-number">0</span>].className.substr(<span class="hljs-number">0</span>, show[<span class="hljs-number">0</span>].className.indexOf(<span class="hljs-string">' show'</span>));}
+
+		<span class="hljs-keyword">var</span> chevron = evt.srcElement;
+		<span class="hljs-keyword">if</span>(chevron.className.indexOf(<span class="hljs-string">'rotate'</span>) == -<span class="hljs-number">1</span>){
+			<span class="hljs-keyword">var</span> temp = <span class="hljs-built_in">document</span>.getElementsByClassName(<span class="hljs-string">'rotate'</span>);
+			<span class="hljs-keyword">if</span>(temp.length &gt; <span class="hljs-number">0</span>){ temp[<span class="hljs-number">0</span>].className = temp[<span class="hljs-number">0</span>].className.substr(<span class="hljs-number">0</span>, temp[<span class="hljs-number">0</span>].className.indexOf(<span class="hljs-string">' rotate'</span>))};
+			chevron.className = chevron.className + <span class="hljs-string">' rotate'</span>;
+			list.className = list.className + <span class="hljs-string">' show'</span>;
+		}<span class="hljs-keyword">else</span>{
+			chevron.className = chevron.className.substr(<span class="hljs-number">0</span>, chevron.className.indexOf(<span class="hljs-string">' rotate'</span>));
+		}
+	}
+};</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>
